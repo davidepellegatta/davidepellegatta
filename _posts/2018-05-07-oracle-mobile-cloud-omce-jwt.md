@@ -48,4 +48,89 @@ OMCe stores JWTs exchange configurations on a policies property file. You can fi
 
 ![OMCe Administration Panel](/assets/img/OMCe_administration_panel.png)
 
-On the "Policies" area is necessary to export your `policies.properties` file.
+On the "Policies" area is necessary to export your `policies.properties` file. This file looks like this:
+
+```java
+# ---------------------------------------------------------
+# MCS Policies.
+# ---------------------------------------------------------
+# ! DO NOT EDIT THE HEADER !
+# Snapshot from: oicdtest
+# System version: 18.2.3-201804172244
+# Data format: 2
+# ---------------------------------------------------------
+*.*.Admin_DcsConfig={}
+*.*.Admin_FeatureConfiguration={ "DCS"\: true }
+*.*.Admin_MigrationConfiguration={}
+*.*.Analytics_ApiCallEventCollectionEnabled=true
+*.*.Asset_AllowPurge=ALL
+*.*.Asset_AllowTrash=ALL
+*.*.Asset_AllowUntrash=ALL
+*.*.Asset_DefaultInitialVersion=1.0
+*.*.CCC_DefaultNodeConfiguration=8.9
+*.*.CCC_LogBody=false
+*.*.CCC_LogBodyMaxLength=512
+*.*.CCC_MaxLoadPerCpu=1
+*.*.CCC_MinFreeMemoryMegabytes=256
+*.*.CCC_SendStackTraceWithError=false
+*.*.Database_CreateTablesPolicy=explicitOnly
+*.*.Database_MaxRows=1000
+*.*.Database_QueryTimeout=20
+*.*.Diagnostics_AverageRequestTimeErrorThreshold=6000
+*.*.Diagnostics_AverageRequestTimeWarningThreshold=3000
+*.*.Diagnostics_ExcludedHttpHeadersInLogs=Authorization,Cookie,oracle-mobile-uitooling-password,Oracle-Mobile-Social-Access-Token
+*.*.Diagnostics_LongRequestCountErrorThreshold=10
+*.*.Diagnostics_LongRequestCountWarningThreshold=0
+*.*.Diagnostics_LongRequestThreshold=8000
+*.*.Diagnostics_PendingRequestErrorThreshold=30
+*.*.Diagnostics_PendingRequestWarningThreshold=15
+*.*.Diagnostics_RequestCountErrorThreshold=10
+*.*.Diagnostics_RequestCountWarningThreshold=0
+*.*.Diagnostics_RequestPercentageErrorThreshold=10
+*.*.Diagnostics_RequestPercentageWarningThreshold=1
+*.*.Logging_Level=800
+*.*.Network_HttpConnectTimeout=20000
+*.*.Network_HttpPatch=METHOD
+*.*.Network_HttpReadTimeout=20000
+*.*.Network_HttpRequestTimeout=40000
+*.*.Notifications_DeviceCountWarningThreshold=70.0
+*.*.Routing_DefaultImplementation=system/MockService(1.0)
+*.*.Security_AllowOrigin=disallow
+*.*.Security_ExposeHeaders=
+*.*.Security_IdentityProviders=[{"identityProviderName"\:"facebook","properties"\:{"graphApiUrl"\:"https\://graph.facebook.com/v2.5/"}}]
+*.*.Security_IgnoreHostnameVerification=false
+*.*.Security_TokenExchangeTimeoutSecs=21600
+*.*.Sync_CollectionTimeToLive=86400
+*.*.User_AllowDynamicUserSchema=false
+*.*.User_DefaultUserRealm=Default(1.0)
+# ---------------------------------------------------------
+# WARNING: 
+#
+# The policies in this section are critical to MCS system operability.
+# Editing these policies could severely impact MCS. Generally,
+# you shouldn't need to modify them. If you must make changes,
+# you should have a thorough understanding of each policy's function
+# and the impact the changes will make to MCS. 
+# ---------------------------------------------------------
+*.platform/analytics(1.0).Routing_BindApiToImpl=platform/analytics(1.0)
+*.platform/appconfig(1.0).Routing_BindApiToImpl=platform/appconfig(1.0)
+*.platform/auth(1.0).Routing_BindApiToImpl=platform/auth(1.0)
+*.platform/database(1.0).Routing_BindApiToImpl=platform/database(1.0)
+*.platform/devices(1.0).Routing_BindApiToImpl=platform/devices(1.0)
+*.platform/extended(1.0).Routing_BindApiToImpl=platform/usersExtended(1.0)
+*.platform/location(1.0).Routing_BindApiToImpl=platform/location(1.0)
+*.platform/sso(1.0).Routing_BindApiToImpl=platform/sso(1.0)
+*.platform/storage(1.0).Routing_BindApiToImpl=platform/storage(1.0)
+*.platform/sync(1.0).Routing_BindApiToImpl=platform/sync(1.0)
+*.platform/ums(1.0).Routing_BindApiToImpl=platform/ums(1.0)
+*.platform/users(1.0).Routing_BindApiToImpl=platform/users(1.0)
+*.system/analyticsDataManagement(1.0).Routing_BindApiToImpl=system/analyticsDataManagement(1.0)
+*.system/analyticsExport(1.0).Routing_BindApiToImpl=system/analyticsExport(1.0)
+*.system/databaseManagement(1.0).Routing_BindApiToImpl=system/databaseManagement(1.0)
+*.system/locationManagement(1.0).Routing_BindApiToImpl=system/locationManagement(1.0)
+*.system/notifications(1.0).Routing_BindApiToImpl=system/notification(1.0)
+```
+
+In order to make everything work we will need to add a custom property to it. 
+
+## \*.\*.Security_AuthTokenConfiguration
